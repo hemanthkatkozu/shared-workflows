@@ -1,0 +1,21 @@
+name: install dependencies & build artifact
+on:
+  workflow_call:
+    inputs:
+      runner:
+        type: string
+        required: true
+jobs:
+  build-artifact:
+    name: install dependencies & build artifact
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - name: checking out repo
+        uses: actions/checkout@v4
+      - name: installing dependencies
+        run: |
+          npm install
+      - name: listing node modules
+        run: |
+          ls -la
+          ls -la node_modules || true
