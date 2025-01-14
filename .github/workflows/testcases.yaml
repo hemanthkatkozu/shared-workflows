@@ -1,0 +1,23 @@
+name: Run test cases
+on:
+  workflow_call:
+    inputs:
+      runner:
+        type: string
+        required: true
+jobs:
+  test-cases:
+    name: Run test cases
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - name: checking out repo
+        uses: actions/checkout@v4
+        
+      - name: running test cases
+        run: |
+          npm run test
+          
+      - name: listing files
+        run: |
+          ls -la
+          pwd
