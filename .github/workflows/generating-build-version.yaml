@@ -8,6 +8,9 @@ on:
       minor_version:
         type: string
         required: true
+      runner:
+        type: string
+        required: true
     outputs:
       image_version:
         value: ${{ jobs.generating-build-version.outputs.image_version }}
