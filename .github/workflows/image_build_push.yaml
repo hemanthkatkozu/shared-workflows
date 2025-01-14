@@ -38,3 +38,10 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USER }}/mynode-app:${{ inputs.image_version }}
+        
+    - name: printing current image
+      run: |
+        echo "### Image build & version" >> $GITHUB_STEP_SUMMARY
+        echo "|                       Docker_Image_Built                                |" >> $GITHUB_STEP_SUMMARY
+        echo "|-------------------------------------------------------------------------|" >> $GITHUB_STEP_SUMMARY
+        echo "|    ${{ secrets.DOCKER_USER }}/mynode-app:${{ inputs.image_version }}"   |>> $GITHUB_STEP_SUMMARY
