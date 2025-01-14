@@ -1,0 +1,30 @@
+name: install dependencies & build artifact
+on:
+  workflow_call:
+    inputs:
+      major_version:
+        type: string
+        required: true
+      minor_version:
+        type: string
+        required: true
+    outputs:
+      image_version:
+        value: ${{ jobs.generating-build-version.outputs.image_version }}
+        
+jobs:
+  generating-build-version:
+    name: generating-build-version
+    runs-on: ${{ inputs.runner }}
+    outputs:
+      image_version: ${{ steps.createtag.outputs.image_version }}
+    steps:
+      - name: checking out repo
+        uses: actions/checkout@v4
+        
+      - name: generating build version
+        id: createtag
+        run: |
+          image_version=v${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ github.run_number }}
+          echo "image_version=$image_version" >> $GITHUB_OUTPUT
+          
